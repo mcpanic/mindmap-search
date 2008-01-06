@@ -1,4 +1,5 @@
 #summary 구조화된 지식DB 검색엔진 개발
+#labels Phase-Design
 
 = 구조화된 지식DB 검색엔진 개발 =
   * 오픈소스 검색엔진을 활용하여 진행한다.
