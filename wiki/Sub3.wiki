@@ -1,0 +1,7 @@
+#summary 지식DB 구축
+#labels Phase-Design
+
+= 지식DB 구축  =
+
+  * 구조화된 형태를 상세하게 define하고, 확장성이 있으면서도 검색이 용이한 포맷으로 만든다.
+  * Indexer 의 사용여부 결정
