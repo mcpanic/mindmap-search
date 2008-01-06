@@ -1,4 +1,5 @@
 #summary 마인드맵 기반의 지식DB 및 검색시스템 메인페이지
+#labels Featured,Phase-Requirements
 
 = Introduction =
 
