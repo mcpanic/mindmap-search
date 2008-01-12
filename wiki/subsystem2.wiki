@@ -1,13 +1,11 @@
-#summary One-sentence summary of this page.
+#summary 지식 DB 시스템
+#labels Featured,Phase-Design
 
-= Introduction =
+= 지식 DB 시스템 =
 
-Add your content here.
+데이터포맷을 지식검색이 가능한 형식의 데이터로 구조화하는 DB시스템
 
-
-= Details =
-
-Add your content here.  Format your content with:
-  * Text in *bold* or _italic_
-  * Headings, paragraphs, and lists
-  * Automatic links to other wiki pages
+== 세부 Task ==
+  * 입력으로는 Mindmap 저장 파일을 받아들인다. (아마도 XML?)
+  * 파일을 읽어나가면서 노드별로 Database에 입력한다.
+  * 검색 시스템이 읽어나가기 좋은 형태로 Database를 구성한다.
