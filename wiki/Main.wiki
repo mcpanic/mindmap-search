@@ -14,6 +14,8 @@
 
 = System 구조 =
 마인드맵 기반의 지식DB 및 검색시스템은 크게 세 가지의 Sub-system으로 나눌 수 있다.
+Use Case Diagram은 전체 구조를 상위수준에서 개념적으로 나타낸다.
+[http://mindmap-search.googlecode.com/files/UCD_v1.png http://mindmap-search.googlecode.com/files/UCD_v1.png]
   # [subsystem1 마인드맵 드로잉 시스템] (마인드맵을 그려서 적절한 형식의 데이터포맷으로 저장해주는 시스템) 
   # [subsystem2 지식 DB 시스템] (데이터포맷을 지식검색이 가능한 형식의 데이터로 구조화하는 DB시스템) 
   # [subsystem3 지식 검색 시스템] (검색어를 입력받아 지식DB에서 원하는 검색결과를 얻는 시스템)
