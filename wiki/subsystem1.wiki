@@ -7,4 +7,7 @@
 
 == 세부 Task ==
   * [subsystem2 지식 DB 시스템] 작업 이후에 진행하기로 한다.
-  * 현재로서는 기존 드로잉 툴의 파일 형식을 출력으로 사용한다.
+  * 현재로서는 기존 드로잉 툴인 [http://freemind.sourceforge.net/wiki/index.php/Main_Page Freemind] 의 파일 형식을 출력으로 사용한다.
+
+== Freemind 파일 형식 분석 ==
+  * 기본적으로 Freemind는 마인드맵을 XML 형태로 저장한다.
