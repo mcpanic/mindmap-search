@@ -10,3 +10,6 @@
   * 지식 DB를 검색해 나가면서 검색어와의 matching 여부를 판단한다.
   * 검색 결과를 추출해낸다.
   * 추출해낸 검색 결과를 사용자가 보기 좋은 형태로 present 한다. 
+
+== Links ==
+  * [http://www.ibm.com/developerworks/kr/library/tutorial/os-apachelucene/index.html 아파치 루씬 간단하고 쉬운 안내서 (한글)]
