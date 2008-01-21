@@ -25,7 +25,7 @@
   * FOLDED = 현재 화면에 보이는지의 여부 (true, false)
 
   * 예제 파일
-[http://mindmap-search.googlecode.com/files/mm_sample.png]
+[http://mindmap-search.googlecode.com/files/mm_sample2.png]
 {{{
 <map version="0.8.0">
 <!-- To view this file, download free mind mapping software FreeMind from http://freemind.sourceforge.net -->
