@@ -13,7 +13,17 @@
   * 기본적으로 Freemind는 마인드맵을 XML 형태로 저장한다.
   * <map> 태그: 최상위 태그로, 버전정보가 표시된다. 버전의 의미는?
   * <node> 태그: 마인드맵 상의 각 태그를 의미한다.
+
+=== <node> 태그 속성일람 ===
+  * CREATED = 생성 시간의 timestamp로 추정
+  * ID = 노드별 고유의 ID
+  * MODIFIED = 최종 수정 시간의 timestamp로 추정
+  * TEXT = 노드의 텍스트
+  * POSITION = 가운데 점으로부터의 상대적 위치 (right, left)
+  * VSHIFT = 가운데 점으로부터의 상대적 세로 위치 (+면 화면 아래방향, -면 위쪽방향)
+
   * 예제 파일
+[http://mindmap-search.googlecode.com/files/mm_sample.png]
 {{{
 <map version="0.8.0">
 <!-- To view this file, download free mind mapping software FreeMind from http://freemind.sourceforge.net -->
