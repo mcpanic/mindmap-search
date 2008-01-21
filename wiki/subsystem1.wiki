@@ -11,3 +11,16 @@
 
 == Freemind 파일 형식 분석 ==
   * 기본적으로 Freemind는 마인드맵을 XML 형태로 저장한다.
+  * <map> 태그: 최상위 태그로, 버전정보가 표시된다. 버전의 의미는?
+  * <node> 태그: 마인드맵 상의 각 태그를 의미한다.
+  * 예제 파일
+{{{
+<map version="0.8.0">
+<!-- To view this file, download free mind mapping software FreeMind from http://freemind.sourceforge.net -->
+<node CREATED="1200904774500" ID="Freemind_Link_976202279" MODIFIED="1200904782093" TEXT="&#xc624;&#xb298; &#xbb50; &#xba39;&#xc9c0;?">
+<node CREATED="1200904798703" HGAP="45" ID="_" MODIFIED="1200904834640" POSITION="right" TEXT="&#xd55c;&#xc2dd;" VSHIFT="-47"/>
+<node CREATED="1200904809187" HGAP="72" ID="Freemind_Link_805573568" MODIFIED="1200904839343" POSITION="left" TEXT="&#xc911;&#xc2dd;" VSHIFT="22"/>
+<node CREATED="1200904816671" ID="Freemind_Link_1859401452" MODIFIED="1200904829609" POSITION="right" TEXT="&#xc591;&#xc2dd;" VSHIFT="90"/>
+</node>
+</map>
+}}}
