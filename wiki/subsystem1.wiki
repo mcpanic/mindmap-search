@@ -20,6 +20,7 @@
   * MODIFIED = 최종 수정 시간의 timestamp로 추정
   * TEXT = 노드의 텍스트
   * POSITION = 가운데 점으로부터의 상대적 위치 (right, left)
+  * HGAP = 가운데 점으로부터 가로 위치 차이 정도
   * VSHIFT = 가운데 점으로부터의 상대적 세로 위치 (+면 화면 아래방향, -면 위쪽방향)
   * COLOR = 노드 색깔
   * FOLDED = 현재 화면에 보이는지의 여부 (true, false)
