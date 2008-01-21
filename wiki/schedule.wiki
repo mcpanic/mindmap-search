@@ -4,8 +4,8 @@
 = 큰 그림 =
   * 2008년 3월 : 지식 DB 시스템 완성
   * 2008년 3월 : 지식 검색 시스템 완성
-  * 2008년 *월 : 마인드맵 드로잉 시스템 완성
-  * 2008년 *월 : 오픈소스 프로젝트 공식 전환 (WoC를 넘어서.. )
+  * 2008년 X월 : 마인드맵 드로잉 시스템 완성
+  * 2008년 X월 : 오픈소스 프로젝트 공식 전환 (WoC를 넘어서.. )
 
 = 주별 일정 (I & I) =
   * 1주(01/06~): Google code setup, 아키텍처 설계 
@@ -30,6 +30,8 @@
 == I & I 관련 링크 ==
   * [http://alistair.cockburn.us/index.php/Incremental_versus_iterative_development Incremental versus Iterative development]
   * [http://www.methodsandtools.com/archive/archive.php?id=14 Going round and round and getting nowhere eXtremely fast? Another look at incremental and iterative development]
+  * [http://en.wikipedia.org/wiki/IBM_Rational_Unified_Process IBM RUP]
+  * [http://en.wikipedia.org/wiki/Iterative_and_incremental_development Iterative and Incremental Development]
 
   * 노트: 3주차의 후반부에는 계절학기 기말고사 및 세미나 평가회 층의 일정이 몰려있어 3~4일간 작업이 어려울 것 같습니다 (1/25일 종강)
 
