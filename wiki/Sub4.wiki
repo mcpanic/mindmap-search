@@ -1,7 +1,0 @@
-#summary 구조화된 지식DB 검색엔진 개발
-#labels Phase-Design
-
-= 구조화된 지식DB 검색엔진 개발 =
-  * 오픈소스 검색엔진을 활용하여 진행한다.
-  * [http://lucene.apache.org/ Lucene] 등의 라이브러리를 활용한다.
-  * 향후 직접 제작한 엔진으로 대체 가능하게 설계한다. 
