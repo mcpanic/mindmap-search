@@ -7,8 +7,32 @@
   * 2008년 *월 : 마인드맵 드로잉 시스템 완성
   * 2008년 *월 : 오픈소스 프로젝트 공식 전환 (WoC를 넘어서.. )
 
+= 주별 일정 (I & I) =
+  * 1주(01/06~): Google code setup, 아키텍처 설계 
+  * 2주(01/13~): 아키텍처 설계 / I & I scheduling
+  * 3주(01/20~): 1st iteration 작업 시작
+  * 4주(01/27~):  
+  * 5주(02/03~): 1st iteration 완료, 1st deliverable presented
+  * 6주(02/10~): 
+  * 7주(02/17~): 2nd iteration 완료, 2nd deliverable presented 
+  * 8주(02/24~): 
+  * 9주(03/02) : 3rd iteration 완료, 3rd deliverable presented
 
-= 주별 일정 =
+  # 1st iteration: 
+  # 2nd iteration:
+  # 3rd iteration: 
+    * In the first iteration we will do 90% analysis, 10% design
+    * In the second iteration we will do 30% analysis, 50% design, 20% coding
+    * In the third iteration we will do 10% analysis, 30% design, 70% coding
+    * In the fourth iteration we will do 10% design, 50% coding, 40% testing and bug fixing
+    * In the fifth iteration we will do 50% testing and bug fixing, 30% integration, 20% deployment.
+
+== I & I 관련 링크 ==
+  * [http://alistair.cockburn.us/index.php/Incremental_versus_iterative_development Incremental versus Iterative development]
+  * [http://www.methodsandtools.com/archive/archive.php?id=14 Going round and round and getting nowhere eXtremely fast?
+Another look at incremental and iterative development]
+
+= 주별 일정 (기존 Waterfall) =
 
   * 1주(01/06~): Google code setup, 아키텍처 설계 
   * 2주(01/13~): 아키텍처 설계 / 지식 DB 시스템 분석 및 설계 
