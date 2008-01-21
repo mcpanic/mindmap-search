@@ -12,7 +12,7 @@
 == Freemind 파일 형식 분석 ==
   * 기본적으로 Freemind는 마인드맵을 XML 형태로 저장한다.
   * <map> 태그: 최상위 태그로, 버전정보가 표시된다. 버전의 의미는?
-  * <node> 태그: 마인드맵 상의 각 태그를 의미한다.
+  * <node> 태그: 마인드맵 상의 각 태그를 의미한다. parents 태그 내에 child 노드의 태그가 들어가서 nested 형태를 띈다.
 
 === <node> 태그 속성일람 ===
   * CREATED = 생성 시간의 timestamp로 추정
@@ -22,6 +22,7 @@
   * POSITION = 가운데 점으로부터의 상대적 위치 (right, left)
   * VSHIFT = 가운데 점으로부터의 상대적 세로 위치 (+면 화면 아래방향, -면 위쪽방향)
   * COLOR = 노드 색깔
+  * FOLDED = 현재 화면에 보이는지의 여부 (true, false)
 
   * 예제 파일
 [http://mindmap-search.googlecode.com/files/mm_sample.png]
