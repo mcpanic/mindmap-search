@@ -10,13 +10,13 @@
 = 주별 일정 (I & I) =
   * 1주(01/06~): Google code setup, 아키텍처 설계 
   * 2주(01/13~): 아키텍처 설계 / I & I scheduling
-  * 3주(01/20~): 1st iteration 작업 시작
+  * 3주(01/20~): [Iteration1 1st iteration] 작업 시작
   * 4주(01/27~):  
-  * 5주(02/03~): 1st iteration 완료, 1st deliverable presented
+  * 5주(02/03~): [Iteration1 1st iteration] 완료, 1st deliverable presented
   * 6주(02/10~): 
-  * 7주(02/17~): 2nd iteration 완료, 2nd deliverable presented 
+  * 7주(02/17~): [Iteration2 2nd iteration] 완료, 2nd deliverable presented 
   * 8주(02/24~): 
-  * 9주(03/02) : 3rd iteration 완료, 3rd deliverable presented
+  * 9주(03/02) : [Iteration3 3rd iteration] 완료, 3rd deliverable presented
 
 == 1st iteration ==
   * Freemind 파일형태를 입력으로 받아 DB에 저장
