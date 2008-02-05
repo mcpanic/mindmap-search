@@ -1,0 +1,31 @@
+#summary 1st Iteration 진행상황
+#labels Phase-Implementation
+
+= 현재 상황 =
+  * 분석을 마치고 설계/구현을 동시에 진행 중
+  * XML Parser 적용 후 동작은 확인, DB 구축부분 진행 중
+  
+= 지식 DB 분석 =
+  * XML 포맷에 대한 이해
+  * 
+
+= 지식 DB 설계 =
+
+
+= 지식 DB 구현 =
+  * 개발환경: Visual Studio 2005 
+  * 구현언어: C++ 
+  * XML Parser: Xerces-C++ Version 2.8.0 ([http://www.apache.org/ Apache] 재단의 오픈소스인 [http://xerces.apache.org/ Xerces] 프로젝트의 서브셋)
+
+= 테스트 결과 =
+
+
+= 어려웠던 점 =
+  * Extreme Programming 기법 적용하기 - 경험부족이 원인
+  * 세부작업 별 소요시간 추정하기 - 경험부족이 원인
+  * 잊고 있던 C++ / OOP 구사의 버벅거림 - 내공부족이 원인
+  * 게으름 극복 - 개인적 사정;;
+  * 동기부여 부족 - 책임감 부족이 원인
+
+= 배운 점 =
+  * to be updated soon...
