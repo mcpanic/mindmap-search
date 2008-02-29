@@ -3,4 +3,5 @@
 __interface IWeightAssigner
 {
 	virtual void Release();
+	virtual void Assign();
 };

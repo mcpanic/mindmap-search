@@ -13,3 +13,8 @@ void SimpleLexAnalyzer::Release()
 {
 	delete this;
 }
+
+void SimpleLexAnalyzer::Analyze()
+{
+
+}

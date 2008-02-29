@@ -29,185 +29,78 @@ static IDBBuilder *CreateDBBuilder()
 	return new SQLiteDBBuilder;
 }
 
-  
-/*
-int main(int argc, char* argv[])
+
+int main (int argc, char* args[]) 
 {
-  try {
-    XMLPlatformUtils::Initialize();
-  }
-  catch (const XMLException& toCatch) {
-    // Do your failure processing here
-    return 1;
-  }
+	// Create module objects
+	IXMLParser *xmlParser = CreateXMLParser();
+	ILexAnalyzer *lexAnalyzer = CreateLexAnalyzer();
+	IWeightAssigner *weightAssigner = CreateWeightAssigner();
+	IIndexBuilder *indexBuilder = CreateIndexBuilder();
+	IDBBuilder *dbBuilder = CreateDBBuilder();
 
-  // Do your actual work with Xerces-C++ here.
+	string filename;
+	cout << "Enter the mind map XML file name:";
+	cin >> filename;
 
-  XMLPlatformUtils::Terminate();
+	// Create DB tables
 
-  // Other terminations and cleanup.
-  return 0;
+	// Parse
+	xmlParser->OpenFile(filename);
+	if (!xmlParser->Parse())
+		return 0;
+	cout << "\nparse successful" << endl;
+
+	// For each node, transform parsed data into DBEntry object format.
+	DBEntry *dbEntry = new DBEntry;
+	dbEntry->SetNodeID(10);
+
+/*
+    Freemind의 마인드맵 XML 형태
+    * <map> 태그: 최상위 태그로, 버전정보가 표시된다. 버전의 의미는?
+    * <node> 태그: 마인드맵 상의 각 태그를 의미한다. parents 태그 내에 child 노드의 태그가 들어가서 nested 형태를 띈다. 
+
+<node> 태그 속성일람
+
+    * CREATED = 생성 시간의 timestamp로 추정
+    * ID = 노드별 고유의 ID
+    * MODIFIED = 최종 수정 시간의 timestamp로 추정
+    * TEXT = 노드의 텍스트
+    * POSITION = 가운데 점으로부터의 상대적 위치 (right, left)
+    * HGAP = 가운데 점으로부터 가로 위치 차이 정도
+    * VSHIFT = 가운데 점으로부터의 상대적 세로 위치 (+면 화면 아래방향, -면 위쪽방향)
+    * COLOR = 노드 색깔
+    * FOLDED = 현재 화면에 보이는지의 여부 (true, false) 
+*/
+
+	// For each node text, perform the following four steps repeatedly.
+
+	// 1. Analyze lexically (separating whitespaces in the node text)
+	lexAnalyzer->Analyze();
+
+	// 2. Assign weight to each analyzed pieces
+	weightAssigner->Assign();
+
+	// 3. Create indices 
+	indexBuilder->Build();
+
+	// 4. Add the entry to the DB
+	dbBuilder->AddEntry();
+	
+
+	// Delete module objects
+	xmlParser->Release();
+	lexAnalyzer->Release();
+	weightAssigner->Release();
+	indexBuilder->Release();
+	dbBuilder->Release();
+
+	return 0;
 }
 
-
+/*
 int _tmain(int argc, _TCHAR* argv[])
 {
 	return 0;
 }
 */
-
-//using namespace std;
-
-#include <xercesc/parsers/XercesDOMParser.hpp>
-#include <xercesc/dom/DOM.hpp>
-#include <xercesc/sax/HandlerBase.hpp>
-#include <xercesc/util/XMLString.hpp>
-#include <xercesc/util/PlatformUtils.hpp>
-#include <xercesc/util/OutOfMemoryException.hpp>
-#include <xercesc/framework/XMLPScanToken.hpp>
-#include <xercesc/framework/MemBufInputSource.hpp>
-
-#if defined(XERCES_NEW_IOSTREAMS)
-#include <iostream>
-#else
-#include <iostream.h>
-#endif
-
-
-
-XERCES_CPP_NAMESPACE_USE
-
-int main (int argc, char* args[]) {
-
-    try {
-        XMLPlatformUtils::Initialize();
-    }
-    catch (const XMLException& toCatch) {
-        char* message = XMLString::transcode(toCatch.getMessage());
-		std::cout << "Error during initialization! :\n"
-             << message << "\n";
-        XMLString::release(&message);
-        return 1;
-    }
-
-    XercesDOMParser* parser = new XercesDOMParser();
-    parser->setValidationScheme(XercesDOMParser::Val_Auto);    
-    parser->setDoNamespaces(true);    // optional
-/*
-	parser->setValidationScheme(XercesDOMParser::Val_Auto);
-    parser->setDoNamespaces(true);
-    parser->setDoSchema(true);
-    parser->setValidationSchemaFullChecking(true);
-*/
-    ErrorHandler* errHandler = (ErrorHandler*) new HandlerBase();
-    parser->setErrorHandler(errHandler);
-
-    char* xmlFile = "personal.xml";
-
-/*
-
-static const char*  gXMLInMemBuf =
-"\
-<?xml version='1.0' encoding='\" MEMPARSE_ENCODING \"'?>\n\
-<!DOCTYPE company [\n\
-<!ELEMENT company     (product,category,developedAt)>\n\
-<!ELEMENT product     (#PCDATA)>\n\
-<!ELEMENT category    (#PCDATA)>\n\
-<!ATTLIST category idea CDATA #IMPLIED>\n\
-<!ELEMENT developedAt (#PCDATA)>\n\
-]>\n\n\
-<company>\n\
-    <product>XML4C</product>\n\
-    <category idea='great'>XML Parsing Tools</category>\n\
-    <developedAt>\n\
-      IBM Center for Java Technology, Silicon Valley, Cupertino, CA\n\
-    </developedAt>\n\
-</company>\
-";
-
-static const char*  gMemBufId = "prodInfo";
-
-
-
-
-    MemBufInputSource* memBufIS = new MemBufInputSource
-    (
-        (const XMLByte*)gXMLInMemBuf
-        , strlen(gXMLInMemBuf)
-        , gMemBufId
-        , false
-    );
-
-
-
-*/
-	// Create a progressive scan token
-XMLPScanToken token;
-
-if (!parser->parseFirst(xmlFile, token))
-{
-  XERCES_STD_QUALIFIER cerr << "scanFirst() failed\n" << XERCES_STD_QUALIFIER endl;
-  return -1;
-}
-
-//
-// We started ok, so lets call scanNext()
-// until we find what we want or hit the end.
-//
-bool gotMore = true;
-//while (gotMore && !handler->getDone())
-while (gotMore)
-  gotMore = parser->parseNext(token);
-
-
-    try {
-  //      parser->parse(xmlFile);
-    }
-	catch (const OutOfMemoryException&) {
-		std::cout << "Exception message is: \n"
-             << "OutOfMemoryException" << "\n";
-        return -1;
-    }
-    catch (const XMLException& toCatch) {
-        char* message = XMLString::transcode(toCatch.getMessage());
-		std::cout << "Exception message is: \n"
-             << message << "\n";
-        XMLString::release(&message);
-        return -1;
-    }
-    catch (const DOMException& toCatch) {
-        char* message = XMLString::transcode(toCatch.msg);
-		std::cout << "Exception message is: \n"
-             << message << "\n";
-        XMLString::release(&message);
-        return -1;
-    }
-	catch (const SAXException& toCatch) {
-	    char* message = XMLString::transcode(toCatch.getMessage());
-		std::cout << "SAX Exception message is: \n"
-             << message << "\n";
-        XMLString::release(&message);
-        return -1;
-	}
-    catch (...) {
-		std::cout << "Unexpected Exception \n" ;
-        return -1;
-    }
-
-/*
-	int errorCount = 0;
-	errorCount = parser->getErrorCount();
-
-	if (errorCount == 0)
-	{
-        XERCES_STD_QUALIFIER cout << "\nFinished parsing the memory buffer containing the following "
-			<< XERCES_STD_QUALIFIER endl;
-	}
-*/
-
-//	XMLPlatformUtils::Terminate();
-    delete parser;
-    delete errHandler;
-
-	return 0;
-}

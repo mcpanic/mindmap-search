@@ -3,4 +3,5 @@
 __interface ILexAnalyzer
 {
 	virtual void Release();
+	virtual void Analyze();
 };

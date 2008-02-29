@@ -8,4 +8,5 @@ public:
 	virtual ~SimpleLexAnalyzer(void);
 
 	void Release();
+	void Analyze();
 };
