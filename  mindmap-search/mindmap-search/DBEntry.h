@@ -10,22 +10,22 @@ using namespace std;
 class DBEntry
 {
 public:
-	DBEntry(void);
-	~DBEntry(void);
+	DBEntry();
+	~DBEntry();
 
-	void SetNodeID (int nodeID);
+	void SetNodeID (int enteredNodeID);
 	int GetNodeID ();
 
-	void SetTimeCreated (time_t timeCreated);
+	void SetTimeCreated (time_t enteredTimeCreated);
 	time_t GetTimeCreated ();
 	
-	void SetTimeModified (time_t timeModified);
+	void SetTimeModified (time_t enteredTimeModified);
 	time_t GetTimeModified ();
 	
-	void SetNodeText (string nodeText);
+	void SetNodeText (string enteredNodeText);
 	string GetNodeText ();
 
-	void SetParentNode (DBEntry *parentNode);
+	void SetParentNode (DBEntry *enteredParentNode);
 	DBEntry *GetParentNode ();
 
 private:

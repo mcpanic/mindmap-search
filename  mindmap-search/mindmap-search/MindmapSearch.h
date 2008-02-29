@@ -14,6 +14,9 @@
 #include "SimpleIndexBuilder.h"
 #include "SQLiteDBBuilder.h"
 
+// DB entry header
+#include "DBEntry.h"
+
 // extern static IXMLParser *CreateXMLParser();
 static IXMLParser *CreateXMLParser();
 static ILexAnalyzer *CreateLexAnalyzer();

@@ -8,4 +8,5 @@ public:
 	virtual ~SimpleIndexBuilder();
 
 	void Release();
+	void Build();
 };

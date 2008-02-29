@@ -13,3 +13,8 @@ void SimpleWeightAssigner::Release()
 {
 	delete this;
 }
+
+void SimpleWeightAssigner::Assign()
+{
+
+}

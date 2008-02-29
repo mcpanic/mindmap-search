@@ -13,3 +13,8 @@ void SimpleIndexBuilder::Release()
 {
 	delete this;
 }
+
+void SimpleIndexBuilder::Build()
+{
+	
+}
