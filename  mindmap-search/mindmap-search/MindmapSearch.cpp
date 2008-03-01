@@ -40,7 +40,7 @@ int main (int argc, char* args[])
 	IDBBuilder *dbBuilder = CreateDBBuilder();
 
 	string filename;
-	cout << "Enter the mind map XML file name:";
+	cout << "Enter the mind map XML file name: ";
 	cin >> filename;
 
 	// Create DB tables
