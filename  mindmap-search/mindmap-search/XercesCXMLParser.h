@@ -36,6 +36,7 @@ public:
 private:
 	void Build();
 	int ProcessParsed(DOMNode *node, bool bPrint);
+	string GetParentNodeID(DOMNode *node);
 
 	string m_szFilename;
 	DOMNode *m_pDoc;

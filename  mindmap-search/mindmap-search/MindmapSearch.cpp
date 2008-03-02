@@ -51,10 +51,6 @@ int main (int argc, char* args[])
 		return 0;
 	cout << "\nparse successful" << endl;
 
-	// For each node, transform parsed data into DBEntry object format.
-	DBEntry *dbEntry = new DBEntry;
-	dbEntry->SetNodeID(10);
-
 /*
     Freemind의 마인드맵 XML 형태
     * <map> 태그: 최상위 태그로, 버전정보가 표시된다. 버전의 의미는?
