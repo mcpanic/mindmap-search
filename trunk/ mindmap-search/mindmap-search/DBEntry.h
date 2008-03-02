@@ -1,7 +1,8 @@
 #pragma once
 
 #include <string>
-#include <ctime>
+#include <iostream>
+#include "MindmapSearch.h"
 
 using namespace std;
 
@@ -26,6 +27,7 @@ public:
 	~DBEntry();
 
 	void PrintNode();
+	void ProcessNode();
 
 	void SetNodeID (string a_NodeID);
 	string GetNodeID ();

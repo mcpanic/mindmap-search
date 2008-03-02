@@ -23,3 +23,5 @@ static ILexAnalyzer *CreateLexAnalyzer();
 static IWeightAssigner *CreateWeightAssigner();
 static IIndexBuilder *CreateIndexBuilder();
 static IDBBuilder *CreateDBBuilder();
+
+

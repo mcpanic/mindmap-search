@@ -86,6 +86,7 @@ int main (int argc, char* args[])
 
 	// Delete module objects
 	xmlParser->Release();
+
 	lexAnalyzer->Release();
 	weightAssigner->Release();
 	indexBuilder->Release();

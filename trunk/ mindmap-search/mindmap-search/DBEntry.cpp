@@ -1,6 +1,5 @@
 #include "StdAfx.h"
 #include "DBEntry.h"
-#include <iostream>
 
 DBEntry::DBEntry(void)
 {
@@ -12,12 +11,17 @@ DBEntry::~DBEntry(void)
 
 void DBEntry::PrintNode()
 {
-	cout << "nodeID		 : " << nodeID << endl;
-	cout << "nodeName	 : " << nodeName << endl;
-	cout << "timeCreated : " << timeCreated << endl;
-	cout << "timeModified: " << timeModified << endl;
-	cout << "nodeText	 : " << nodeText << endl;
-	cout << "parentNodeID: " << parentNodeID << endl;
+	cout << "nodeID			: " << nodeID << endl;
+	cout << "nodeName		: " << nodeName << endl;
+	cout << "timeCreated	: " << timeCreated << endl;
+	cout << "timeModified	: " << timeModified << endl;
+	cout << "nodeText		: " << nodeText << endl;
+	cout << "parentNodeID	: " << parentNodeID << endl;
+}
+
+void DBEntry::ProcessNode()
+{
+
 }
 
 void DBEntry::SetNodeID (string a_NodeID)
@@ -74,6 +78,7 @@ void DBEntry::SetParentNode (DBEntry *a_ParentNode)
 {
 	parentNode = a_ParentNode;
 }
+
 DBEntry *DBEntry::GetParentNode ()
 {
 	return parentNode;
