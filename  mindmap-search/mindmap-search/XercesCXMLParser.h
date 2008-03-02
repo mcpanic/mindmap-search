@@ -31,10 +31,12 @@ public:
 
 	bool OpenFile(string a_szFilename);
 	bool Parse();
-	void Print();
-	void Build();
+	void PrintFile();
 
 private:
+	void Build();
+	int ProcessParsed(DOMNode *node, bool bPrint);
+
 	string m_szFilename;
 	DOMNode *m_pDoc;
 	DOMDocument *m_pDocument;

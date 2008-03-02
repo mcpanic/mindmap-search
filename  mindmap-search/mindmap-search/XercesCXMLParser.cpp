@@ -106,7 +106,7 @@ bool XercesCXMLParser::Parse()
 	Build();
 
 	// for the debugging purpose
-//	Print();
+//	PrintFile();
 
 /*
 	int errorCount = 0;
@@ -127,7 +127,7 @@ bool XercesCXMLParser::Parse()
 	return true;
 }
 
-static int countChildElements(DOMNode *node, bool bPrint)
+int XercesCXMLParser::ProcessParsed(DOMNode *node, bool bPrint)
 {
     DOMNode *child;
     int count = 0;
@@ -170,7 +170,7 @@ static int countChildElements(DOMNode *node, bool bPrint)
 		}
 
         for (child = node->getFirstChild(); child != 0; child=child->getNextSibling())
-            count += countChildElements(child, bPrint);
+            count += ProcessParsed(child, bPrint);
     }
     return count;
 }
@@ -181,7 +181,7 @@ void XercesCXMLParser::Build()
     unsigned int elementCount = 0;
     if (m_pDocument) 
 	{
-        elementCount = countChildElements((DOMNode*)m_pDocument->getDocumentElement(), true);
+        elementCount = ProcessParsed((DOMNode*)m_pDocument->getDocumentElement(), true);
         // test getElementsByTagName and getLength
 /*
 		XMLCh xa[] = {chAsterisk, chNull};
@@ -191,6 +191,45 @@ void XercesCXMLParser::Build()
         }
 */
 	}
+
+
+
+}
+
+void XercesCXMLParser::PrintFile()
+{
+
+	DOMImplementation *pImplement = NULL;
+	// these two are needed to display DOM output.
+	DOMWriter *pSerializer = NULL;
+	XMLFormatTarget *pTarget = NULL;
+
+	// get a serializer, an instance of DOMWriter (the "LS" stands for load-save).
+	// mcpanic 8301 XercesString -> XMLString
+//	pImplement = DOMImplementationRegistry::getDOMImplementation(XMLString("LS"));
+	pImplement = DOMImplementationRegistry::getDOMImplementation(XMLString::transcode("LS"));
+	pSerializer = ( (DOMImplementationLS*)pImplement )->createDOMWriter();
+	pTarget = new StdOutFormatTarget();
+	// set user specified end of line sequence and output encoding
+	// mcpanic 8301 XercesString -> XMLString
+	pSerializer->setNewLine( XMLString::transcode("\n") );
+
+	// set feature if the serializer supports the feature/mode
+	if ( pSerializer->canSetFeature(XMLUni::fgDOMWRTSplitCdataSections, false) )
+	pSerializer->setFeature(XMLUni::fgDOMWRTSplitCdataSections, false);
+
+	if ( pSerializer->canSetFeature(XMLUni::fgDOMWRTDiscardDefaultContent, false) )
+	pSerializer->setFeature(XMLUni::fgDOMWRTDiscardDefaultContent, false);
+
+	// turn off serializer "pretty print" option
+	if ( pSerializer->canSetFeature(XMLUni::fgDOMWRTFormatPrettyPrint, false) )
+	pSerializer->setFeature(XMLUni::fgDOMWRTFormatPrettyPrint, false);
+
+	if ( pSerializer->canSetFeature(XMLUni::fgDOMWRTBOM, false) )
+	pSerializer->setFeature(XMLUni::fgDOMWRTBOM, false);
+
+	pSerializer->writeNode(pTarget, *m_pDoc);
+}
 
 /*
 	DOMNamedNodeMap *pNodeMap;
@@ -231,40 +270,3 @@ void XercesCXMLParser::Build()
 		cout << endl;
 	}
 */	
-
-}
-
-void XercesCXMLParser::Print()
-{
-
-	DOMImplementation *pImplement = NULL;
-	// these two are needed to display DOM output.
-	DOMWriter *pSerializer = NULL;
-	XMLFormatTarget *pTarget = NULL;
-
-	// get a serializer, an instance of DOMWriter (the "LS" stands for load-save).
-	// mcpanic 8301 XercesString -> XMLString
-//	pImplement = DOMImplementationRegistry::getDOMImplementation(XMLString("LS"));
-	pImplement = DOMImplementationRegistry::getDOMImplementation(XMLString::transcode("LS"));
-	pSerializer = ( (DOMImplementationLS*)pImplement )->createDOMWriter();
-	pTarget = new StdOutFormatTarget();
-	// set user specified end of line sequence and output encoding
-	// mcpanic 8301 XercesString -> XMLString
-	pSerializer->setNewLine( XMLString::transcode("\n") );
-
-	// set feature if the serializer supports the feature/mode
-	if ( pSerializer->canSetFeature(XMLUni::fgDOMWRTSplitCdataSections, false) )
-	pSerializer->setFeature(XMLUni::fgDOMWRTSplitCdataSections, false);
-
-	if ( pSerializer->canSetFeature(XMLUni::fgDOMWRTDiscardDefaultContent, false) )
-	pSerializer->setFeature(XMLUni::fgDOMWRTDiscardDefaultContent, false);
-
-	// turn off serializer "pretty print" option
-	if ( pSerializer->canSetFeature(XMLUni::fgDOMWRTFormatPrettyPrint, false) )
-	pSerializer->setFeature(XMLUni::fgDOMWRTFormatPrettyPrint, false);
-
-	if ( pSerializer->canSetFeature(XMLUni::fgDOMWRTBOM, false) )
-	pSerializer->setFeature(XMLUni::fgDOMWRTBOM, false);
-
-	pSerializer->writeNode(pTarget, *m_pDoc);
-}
