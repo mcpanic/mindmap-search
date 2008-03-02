@@ -301,13 +301,10 @@ void XercesCXMLParser::PrintFile()
 	XMLFormatTarget *pTarget = NULL;
 
 	// get a serializer, an instance of DOMWriter (the "LS" stands for load-save).
-	// mcpanic 8301 XercesString -> XMLString
-//	pImplement = DOMImplementationRegistry::getDOMImplementation(XMLString("LS"));
 	pImplement = DOMImplementationRegistry::getDOMImplementation(XMLString::transcode("LS"));
 	pSerializer = ( (DOMImplementationLS*)pImplement )->createDOMWriter();
 	pTarget = new StdOutFormatTarget();
 	// set user specified end of line sequence and output encoding
-	// mcpanic 8301 XercesString -> XMLString
 	pSerializer->setNewLine( XMLString::transcode("\n") );
 
 	// set feature if the serializer supports the feature/mode
