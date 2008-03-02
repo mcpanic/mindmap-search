@@ -1,5 +1,6 @@
 #include "StdAfx.h"
 #include "DBEntry.h"
+#include <iostream>
 
 DBEntry::DBEntry(void)
 {
@@ -9,19 +10,42 @@ DBEntry::~DBEntry(void)
 {
 }
 
-void DBEntry::SetNodeID (int enteredNodeID)
+void DBEntry::PrintNode()
 {
-	nodeID = enteredNodeID;
+	if (nodeName != "node")
+		return;
+
+	cout << "nodeID " << nodeID << endl;
+	cout << "nodeName " << nodeName << endl;
+	cout << "timeCreated " << timeCreated << endl;
+	cout << "timeModified " << timeModified << endl;
+	cout << "nodeText " << nodeText << endl;
+	cout << "parentNodeID " << parentNodeID << endl;
 }
 
-int DBEntry::GetNodeID ()
+void DBEntry::SetNodeID (string a_NodeID)
+{
+	nodeID = a_NodeID;
+}
+
+string DBEntry::GetNodeID ()
 {
 	return nodeID;
 }
 
-void DBEntry::SetTimeCreated (time_t enteredTimeCreated)
+void DBEntry::SetNodeName (string a_NodeName)
 {
-	timeCreated = enteredTimeCreated;
+	nodeText = a_NodeName;
+}
+
+string DBEntry::GetNodeName ()
+{
+	return nodeName;
+}
+
+void DBEntry::SetTimeCreated (time_t a_TimeCreated)
+{
+	timeCreated = a_TimeCreated;
 }
 
 time_t DBEntry::GetTimeCreated ()
@@ -29,9 +53,9 @@ time_t DBEntry::GetTimeCreated ()
 	return timeCreated;
 }
 
-void DBEntry::SetTimeModified (time_t enteredTimeModified)
+void DBEntry::SetTimeModified (time_t a_TimeModified)
 {
-	timeModified = enteredTimeModified;
+	timeModified = a_TimeModified;
 }
 
 time_t DBEntry::GetTimeModified ()
@@ -39,9 +63,9 @@ time_t DBEntry::GetTimeModified ()
 	return timeModified;
 }
 
-void DBEntry::SetNodeText (string enteredNodeText)
+void DBEntry::SetNodeText (string a_NodeText)
 {
-	nodeText = enteredNodeText;
+	nodeText = a_NodeText;
 }
 
 string DBEntry::GetNodeText ()
@@ -49,11 +73,21 @@ string DBEntry::GetNodeText ()
 	return nodeText;
 }
 
-void DBEntry::SetParentNode (DBEntry *enteredParentNode)
+void DBEntry::SetParentNode (DBEntry *a_ParentNode)
 {
-	parentNode = enteredParentNode;
+	parentNode = a_ParentNode;
 }
 DBEntry *DBEntry::GetParentNode ()
 {
 	return parentNode;
+}
+
+void DBEntry::SetParentNodeID (string a_ParentNodeID)
+{
+	parentNodeID = a_ParentNodeID;
+}
+
+string DBEntry::GetParentNodeID ()
+{
+	return parentNodeID;
 }

@@ -1,5 +1,6 @@
 #include "StdAfx.h"
 #include "XercesCXMLParser.h"
+#include "DBEntry.h"
 
 XercesCXMLParser::XercesCXMLParser()
 {
@@ -127,6 +128,44 @@ bool XercesCXMLParser::Parse()
 	return true;
 }
 
+
+string XercesCXMLParser::GetParentNodeID (DOMNode *node)
+{
+	char *name;
+	DOMNode *parent;
+	bool bSuccess = false;
+
+	parent = node->getParentNode();
+
+	if (parent->hasAttributes())
+	{
+        // get all the attributes of the node
+        DOMNamedNodeMap *pAttributes = node->getAttributes();
+        int nSize = pAttributes->getLength();
+        for(int i=0;i<nSize;++i) 
+		{
+            DOMAttr *pAttributeNode = (DOMAttr*) pAttributes->item(i);
+            // get attribute name
+            name = XMLString::transcode(pAttributeNode->getName());
+            
+			if (strcmp(name, "ID") == 0)
+			{
+				XMLString::release(&name);  
+				// get attribute type
+				name = XMLString::transcode(pAttributeNode->getValue());
+				bSuccess = true;
+			}
+			XMLString::release(&name);
+
+        }
+	}
+
+	if (bSuccess)
+		return name;
+	else
+		return "NONE";
+}
+
 int XercesCXMLParser::ProcessParsed(DOMNode *node, bool bPrint)
 {
     DOMNode *child;
@@ -137,11 +176,19 @@ int XercesCXMLParser::ProcessParsed(DOMNode *node, bool bPrint)
 		{
             if(bPrint) 
 			{
+
+				DBEntry *dbEntry = new DBEntry;
+
                 char *name = XMLString::transcode(node->getNodeName());
                 XERCES_STD_QUALIFIER cout <<"----------------------------------------------------------"<<XERCES_STD_QUALIFIER endl;
                 XERCES_STD_QUALIFIER cout <<"Encountered Element : "<< name << XERCES_STD_QUALIFIER endl;
-                
+     
+				dbEntry->SetNodeName (name);
+
                 XMLString::release(&name);
+
+				// Set the parent ID
+				dbEntry->SetParentNodeID(GetParentNodeID(node));
 			
                 if(node->hasAttributes()) 
 				{
@@ -156,6 +203,28 @@ int XercesCXMLParser::ProcessParsed(DOMNode *node, bool bPrint)
                         // get attribute name
                         char *name = XMLString::transcode(pAttributeNode->getName());
                         
+						if (strcmp(name, "ID") == 0)
+						{
+							dbEntry->SetNodeID (name);
+						}
+						else if (strcmp(name, "CREATED") == 0)
+						{
+							dbEntry->SetTimeCreated (atoi(name));
+						}
+						else if (strcmp(name, "MODIFIED") == 0)
+						{
+							dbEntry->SetTimeModified (atoi(name));
+						}
+						else if (strcmp(name, "TEXT") == 0)
+						{
+							dbEntry->SetNodeText (name);
+						}
+						else
+						{
+							// do nothing for now
+						}
+
+
                         XERCES_STD_QUALIFIER cout << "\t" << name << "=";
                         XMLString::release(&name);
                         
@@ -165,6 +234,8 @@ int XercesCXMLParser::ProcessParsed(DOMNode *node, bool bPrint)
                         XMLString::release(&name);
                     }
                 }
+
+				dbEntry->PrintNode();
             }
 			++count;
 		}
