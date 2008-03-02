@@ -9,5 +9,5 @@ public:
 	
 	virtual bool OpenFile(string filename);
 	virtual bool Parse();
-	virtual void Print();
+	virtual void PrintFile();
 };
