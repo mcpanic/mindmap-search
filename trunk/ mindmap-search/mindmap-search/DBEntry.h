@@ -7,6 +7,18 @@ using namespace std;
 
 #define MAX_NODE_TEXT 512
 
+
+typedef enum
+{
+	eAttrNodeID,
+	eAttrNodeName,
+	eAttrTimeCreated,
+	eAttrTimeModified,
+	eAttrNodeText,
+	eAttrParentNodeID,
+	eAttrOther
+} EATTRTYPE;
+
 class DBEntry
 {
 public:
@@ -21,11 +33,11 @@ public:
 	void SetNodeName (string a_NodeName);
 	string GetNodeName ();
 
-	void SetTimeCreated (time_t a_TimeCreated);
-	time_t GetTimeCreated ();
+	void SetTimeCreated (string a_TimeCreated);
+	string GetTimeCreated ();
 	
-	void SetTimeModified (time_t a_TimeModified);
-	time_t GetTimeModified ();
+	void SetTimeModified (string a_TimeModified);
+	string GetTimeModified ();
 	
 	void SetNodeText (string a_NodeText);
 	string GetNodeText ();
@@ -39,8 +51,8 @@ public:
 private:
 	string nodeID;
 	string nodeName;
-	time_t timeCreated;
-	time_t timeModified;
+	string timeCreated;
+	string timeModified;
 	string nodeText;
 	DBEntry * parentNode;	// Parent Node pointer 여야 할까 아니면 ID 여야 할까?
 	string parentNodeID;
@@ -54,7 +66,7 @@ private:
     * Time last modified (time): 최종수정시간, timestamp 사용고려
     * Text (char): 노드에 기록된 텍스트
     * Parent node (int, default=NULL): root의 경우에는 NULL
-    * Note (char): 컬러, 이모티콘 등 
+    * Other (char): 컬러, 이모티콘 등 
 */
 
 };
