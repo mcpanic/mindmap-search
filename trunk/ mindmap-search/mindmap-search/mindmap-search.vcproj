@@ -40,7 +40,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="&quot;E:\Documents and Settings\My Documents\Visual Studio 2005\Projects\xerces-c-src_2_8_0\src&quot;"
+				AdditionalIncludeDirectories="&quot;E:\Documents and Settings\My Documents\Visual Studio 2005\Projects\xerces-c-src_2_8_0\src&quot;;&quot;E:\Documents and Settings\My Documents\Visual Studio 2005\Projects\sqlite-amalgamation-3_5_6&quot;"
 				PreprocessorDefinitions="WIN32;_DEBUG;_CONSOLE"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"

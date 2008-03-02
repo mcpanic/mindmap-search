@@ -40,14 +40,14 @@ bool ProcessNodeText (vector<DBEntry> &a_vNodes)
 	vector<DBEntry>::iterator itNodes;
 	for (itNodes = a_vNodes.begin(); itNodes != a_vNodes.end(); itNodes++)
 	{
-		szNodeText = (*itNodes).GetNodeText();
+		szNodeText = itNodes->GetNodeText();
 		
 		// 1. Analyze lexically (separating whitespaces in the node text)
 		lexAnalyzer->Analyze(*itNodes);
 
 		// Print lexically analyzed tokens for the node
-		(*itNodes).PrintNodeToken();
-
+		itNodes->PrintNodeToken();
+		
 		// 2. Assign weight to each analyzed pieces
 		weightAssigner->Assign();
 

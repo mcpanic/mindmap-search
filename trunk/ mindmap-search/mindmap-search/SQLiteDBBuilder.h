@@ -1,7 +1,7 @@
 #pragma once
 #include "DBBuilder.h"
 
-//#include <sqlite3.h>
+#include <sqlite3.h>
 
 class SQLiteDBBuilder: public IDBBuilder
 {
