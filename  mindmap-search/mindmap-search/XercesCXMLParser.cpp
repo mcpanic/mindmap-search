@@ -14,19 +14,21 @@ void XercesCXMLParser::Release()
 	delete this;
 }
 
-bool XercesCXMLParser::OpenFile(string insertedFile)
+bool XercesCXMLParser::OpenFile(string a_szFilename)
 {
-	filename = insertedFile;
+	m_szFilename = a_szFilename;
 	return true;
 }
 
 
 bool XercesCXMLParser::Parse()
 {
-    try {
+    try 
+	{
         XMLPlatformUtils::Initialize();
     }
-    catch (const XMLException& toCatch) {
+    catch (const XMLException& toCatch) 
+	{
         char* message = XMLString::transcode(toCatch.getMessage());
 		std::cout << "Error during initialization! :\n" << message << "\n";
         XMLString::release(&message);
@@ -34,19 +36,16 @@ bool XercesCXMLParser::Parse()
     }
 
     XercesDOMParser* parser = new XercesDOMParser();
-    parser->setValidationScheme(XercesDOMParser::Val_Auto);    
-    parser->setDoNamespaces(true);    // optional
-
-	parser->setValidationScheme(XercesDOMParser::Val_Auto);
-    parser->setDoNamespaces(true);
+    parser->setValidationScheme(XercesDOMParser::Val_Auto);  
+	//parser->setLoadExternalDTD(true);
+    parser->setDoNamespaces(false);
     parser->setDoSchema(true);
-    parser->setValidationSchemaFullChecking(true);
+    //parser->setValidationSchemaFullChecking(true);
 
     ErrorHandler* errHandler = (ErrorHandler*) new HandlerBase();
     parser->setErrorHandler(errHandler);
 
-	const char *xmlFile = filename.c_str();
-//    char* xmlFile = "personal.xml";
+	const char *xmlFile = m_szFilename.c_str();
 
 /*
 	// Create a progressive scan token
@@ -101,11 +100,13 @@ bool XercesCXMLParser::Parse()
         return false;
     }
 
+	m_pDoc = parser->getDocument();
+	m_pDocument = parser->getDocument();
 
-	pDoc = parser->getDocument();
+	Build();
 
 	// for the debugging purpose
-	//Print();
+//	Print();
 
 /*
 	int errorCount = 0;
@@ -118,11 +119,119 @@ bool XercesCXMLParser::Parse()
 	}
 */
 
-//	XMLPlatformUtils::Terminate();
     delete parser;
     delete errHandler;
 
+	
+	XMLPlatformUtils::Terminate();
 	return true;
+}
+
+static int countChildElements(DOMNode *node, bool bPrint)
+{
+    DOMNode *child;
+    int count = 0;
+    if (node) 
+	{
+        if (node->getNodeType() == DOMNode::ELEMENT_NODE)
+		{
+            if(bPrint) 
+			{
+                char *name = XMLString::transcode(node->getNodeName());
+                XERCES_STD_QUALIFIER cout <<"----------------------------------------------------------"<<XERCES_STD_QUALIFIER endl;
+                XERCES_STD_QUALIFIER cout <<"Encountered Element : "<< name << XERCES_STD_QUALIFIER endl;
+                
+                XMLString::release(&name);
+			
+                if(node->hasAttributes()) 
+				{
+                    // get all the attributes of the node
+                    DOMNamedNodeMap *pAttributes = node->getAttributes();
+                    int nSize = pAttributes->getLength();
+                    XERCES_STD_QUALIFIER cout <<"\tAttributes" << XERCES_STD_QUALIFIER endl;
+                    XERCES_STD_QUALIFIER cout <<"\t----------" << XERCES_STD_QUALIFIER endl;
+                    for(int i=0;i<nSize;++i) 
+					{
+                        DOMAttr *pAttributeNode = (DOMAttr*) pAttributes->item(i);
+                        // get attribute name
+                        char *name = XMLString::transcode(pAttributeNode->getName());
+                        
+                        XERCES_STD_QUALIFIER cout << "\t" << name << "=";
+                        XMLString::release(&name);
+                        
+                        // get attribute type
+                        name = XMLString::transcode(pAttributeNode->getValue());
+                        XERCES_STD_QUALIFIER cout << name << XERCES_STD_QUALIFIER endl;
+                        XMLString::release(&name);
+                    }
+                }
+            }
+			++count;
+		}
+
+        for (child = node->getFirstChild(); child != 0; child=child->getNextSibling())
+            count += countChildElements(child, bPrint);
+    }
+    return count;
+}
+
+
+void XercesCXMLParser::Build()
+{
+    unsigned int elementCount = 0;
+    if (m_pDocument) 
+	{
+        elementCount = countChildElements((DOMNode*)m_pDocument->getDocumentElement(), true);
+        // test getElementsByTagName and getLength
+/*
+		XMLCh xa[] = {chAsterisk, chNull};
+        if (elementCount != m_pDocument->getElementsByTagName(xa)->getLength()) 
+		{
+            XERCES_STD_QUALIFIER cout << "\nErrors occurred, element count is wrong\n" << XERCES_STD_QUALIFIER endl;
+        }
+*/
+	}
+
+/*
+	DOMNamedNodeMap *pNodeMap;
+
+	DOMNode *currentNode;
+	DOMElement *pElement = m_pDocument->getDocumentElement();
+
+	// create an iterator to visit all text nodes.
+	DOMTreeWalker *iterator = m_pDocument->createTreeWalker(pElement, DOMNodeFilter::SHOW_TEXT, NULL, true);
+	// use the tree walker to print out the text nodes.
+	for ( currentNode = iterator->nextNode(); currentNode != 0; currentNode = iterator->nextNode() )
+	{
+		//currentNode->normalize();
+		// note: this leaks memory!
+		cout << "child  : " << currentNode->hasAttributes() << endl;
+		cout << "attr   : " << currentNode->hasChildNodes() << endl;
+		cout << "parent : " << currentNode->getParentNode() << endl;
+		cout << "child  : " << currentNode->getFirstChild() << endl;
+		cout << "sibprev: " << currentNode->getPreviousSibling() << endl;
+		cout << "sibnext: " << currentNode->getNextSibling() << endl;
+		//cout << "URI    : " << XMLString::transcode(currentNode->getNamespaceURI()) << endl;
+		//cout << "prefi  : " << XMLString::transcode(currentNode->getPrefix()) << endl;
+		//cout << "local  : " << XMLString::transcode(currentNode->getLocalName()) << endl;
+
+
+		cout << "name   : " << XMLString::transcode(currentNode->getNodeName()) << endl;
+		cout << "type   : " << currentNode->getNodeType() << endl;
+		cout << "value  : " << XMLString::transcode(currentNode->getNodeValue()) << endl;
+		cout << "text   : " << XMLString::transcode(currentNode->getTextContent()) << endl;
+		
+		pNodeMap= currentNode->getAttributes();
+		if (pNodeMap)
+		{
+			cout << "leng : " << pNodeMap->getLength() << endl;
+			cout << "COLOR: " << pNodeMap->getNamedItem(XMLString::transcode("COLOR")) << endl;
+			cout << "CREATED: " << pNodeMap->getNamedItem(XMLString::transcode("CREATED")) << endl;
+		}
+		cout << endl;
+	}
+*/	
+
 }
 
 void XercesCXMLParser::Print()
@@ -157,6 +266,5 @@ void XercesCXMLParser::Print()
 	if ( pSerializer->canSetFeature(XMLUni::fgDOMWRTBOM, false) )
 	pSerializer->setFeature(XMLUni::fgDOMWRTBOM, false);
 
-	pSerializer->writeNode(pTarget, *pDoc);
-
+	pSerializer->writeNode(pTarget, *m_pDoc);
 }
