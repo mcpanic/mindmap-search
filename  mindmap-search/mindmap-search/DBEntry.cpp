@@ -12,15 +12,12 @@ DBEntry::~DBEntry(void)
 
 void DBEntry::PrintNode()
 {
-	if (nodeName != "node")
-		return;
-
-	cout << "nodeID " << nodeID << endl;
-	cout << "nodeName " << nodeName << endl;
-	cout << "timeCreated " << timeCreated << endl;
-	cout << "timeModified " << timeModified << endl;
-	cout << "nodeText " << nodeText << endl;
-	cout << "parentNodeID " << parentNodeID << endl;
+	cout << "nodeID		 : " << nodeID << endl;
+	cout << "nodeName	 : " << nodeName << endl;
+	cout << "timeCreated : " << timeCreated << endl;
+	cout << "timeModified: " << timeModified << endl;
+	cout << "nodeText	 : " << nodeText << endl;
+	cout << "parentNodeID: " << parentNodeID << endl;
 }
 
 void DBEntry::SetNodeID (string a_NodeID)
@@ -35,7 +32,7 @@ string DBEntry::GetNodeID ()
 
 void DBEntry::SetNodeName (string a_NodeName)
 {
-	nodeText = a_NodeName;
+	nodeName = a_NodeName;
 }
 
 string DBEntry::GetNodeName ()
@@ -43,22 +40,22 @@ string DBEntry::GetNodeName ()
 	return nodeName;
 }
 
-void DBEntry::SetTimeCreated (time_t a_TimeCreated)
+void DBEntry::SetTimeCreated (string a_TimeCreated)
 {
 	timeCreated = a_TimeCreated;
 }
 
-time_t DBEntry::GetTimeCreated ()
+string DBEntry::GetTimeCreated ()
 {
 	return timeCreated;
 }
 
-void DBEntry::SetTimeModified (time_t a_TimeModified)
+void DBEntry::SetTimeModified (string a_TimeModified)
 {
 	timeModified = a_TimeModified;
 }
 
-time_t DBEntry::GetTimeModified ()
+string DBEntry::GetTimeModified ()
 {
 	return timeModified;
 }

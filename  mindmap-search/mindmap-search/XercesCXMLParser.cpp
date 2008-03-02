@@ -154,8 +154,9 @@ string XercesCXMLParser::GetParentNodeID (DOMNode *node)
 				// get attribute type
 				name = XMLString::transcode(pAttributeNode->getValue());
 				bSuccess = true;
+				break;
 			}
-			XMLString::release(&name);
+			//XMLString::release(&name);
 
         }
 	}
@@ -166,9 +167,12 @@ string XercesCXMLParser::GetParentNodeID (DOMNode *node)
 		return "NONE";
 }
 
+
 int XercesCXMLParser::ProcessParsed(DOMNode *node, bool bPrint)
 {
     DOMNode *child;
+	EATTRTYPE eAttrType;
+
     int count = 0;
     if (node) 
 	{
@@ -205,31 +209,52 @@ int XercesCXMLParser::ProcessParsed(DOMNode *node, bool bPrint)
                         
 						if (strcmp(name, "ID") == 0)
 						{
-							dbEntry->SetNodeID (name);
+							eAttrType = eAttrNodeID;
 						}
 						else if (strcmp(name, "CREATED") == 0)
 						{
-							dbEntry->SetTimeCreated (atoi(name));
+							eAttrType = eAttrTimeCreated;
 						}
 						else if (strcmp(name, "MODIFIED") == 0)
 						{
-							dbEntry->SetTimeModified (atoi(name));
+							eAttrType = eAttrTimeModified;
 						}
 						else if (strcmp(name, "TEXT") == 0)
 						{
-							dbEntry->SetNodeText (name);
+							eAttrType = eAttrNodeText;
 						}
 						else
 						{
 							// do nothing for now
+							eAttrType = eAttrOther;
 						}
-
 
                         XERCES_STD_QUALIFIER cout << "\t" << name << "=";
                         XMLString::release(&name);
                         
                         // get attribute type
                         name = XMLString::transcode(pAttributeNode->getValue());
+
+						if (eAttrType == eAttrNodeID)
+						{
+							dbEntry->SetNodeID (name);
+						}
+						else if (eAttrType == eAttrTimeCreated)
+						{
+							dbEntry->SetTimeCreated (name);
+						}
+						else if (eAttrType == eAttrTimeModified)
+						{
+							dbEntry->SetTimeModified (name);
+						}
+						else if (eAttrType == eAttrNodeText)
+						{	
+							dbEntry->SetNodeText (name);
+						}
+						else 
+						{
+							// do nothing for now
+						}
                         XERCES_STD_QUALIFIER cout << name << XERCES_STD_QUALIFIER endl;
                         XMLString::release(&name);
                     }
