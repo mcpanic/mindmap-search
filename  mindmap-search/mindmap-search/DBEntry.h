@@ -50,6 +50,9 @@ public:
 	void SetParentNodeID (string a_ParentNodeID);
 	string GetParentNodeID ();
 
+	vector<string> &GetNodeToken ();
+	void PrintNodeToken();
+
 private:
 	string nodeID;
 	string nodeName;
@@ -58,6 +61,8 @@ private:
 	string nodeText;
 	DBEntry * parentNode;	// Parent Node pointer 여야 할까 아니면 ID 여야 할까?
 	string parentNodeID;
+
+	vector<string> nodeToken; // Lexically analyzed text by the lexAnalyzer
 
 
 /*

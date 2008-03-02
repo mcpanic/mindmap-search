@@ -1,9 +1,10 @@
 #include "StdAfx.h"
 #include "XercesCXMLParser.h"
-#include "DBEntry.h"
+
 
 XercesCXMLParser::XercesCXMLParser()
 {
+
 }
 
 XercesCXMLParser::~XercesCXMLParser()
@@ -12,6 +13,11 @@ XercesCXMLParser::~XercesCXMLParser()
 
 void XercesCXMLParser::Release()
 {
+	delete m_pParser;
+    delete m_pErrHandler;
+
+	XMLPlatformUtils::Terminate();
+
 	delete this;
 }
 
@@ -36,42 +42,24 @@ bool XercesCXMLParser::Parse()
         return false;
     }
 
-    XercesDOMParser* parser = new XercesDOMParser();
-    parser->setValidationScheme(XercesDOMParser::Val_Auto);  
-	//parser->setLoadExternalDTD(true);
-    parser->setDoNamespaces(false);
-    parser->setDoSchema(true);
-    //parser->setValidationSchemaFullChecking(true);
+	m_pParser = new XercesDOMParser();
+    m_pErrHandler = (ErrorHandler*) new HandlerBase();
 
-    ErrorHandler* errHandler = (ErrorHandler*) new HandlerBase();
-    parser->setErrorHandler(errHandler);
+    //XercesDOMParser* parser = new XercesDOMParser();
+    m_pParser->setValidationScheme(XercesDOMParser::Val_Auto);  
+	//parser->setLoadExternalDTD(true);
+    m_pParser->setDoNamespaces(false);
+    m_pParser->setDoSchema(true);
+    //m_pParser->setValidationSchemaFullChecking(true);
+
+    //ErrorHandler* m_pErrHandler = (ErrorHandler*) new HandlerBase();
+    m_pParser->setErrorHandler(m_pErrHandler);
 
 	const char *xmlFile = m_szFilename.c_str();
 
-/*
-	// Create a progressive scan token
-	XMLPScanToken token;
-
-	if (!parser->parseFirst(xmlFile, token))
-	{
-	  XERCES_STD_QUALIFIER cerr << "scanFirst() failed\n" << XERCES_STD_QUALIFIER endl;
-	  return false;
-	}
-
-
-	//
-	// We started ok, so lets call scanNext()
-	// until we find what we want or hit the end.
-	//
-	bool gotMore = true;
-	//while (gotMore && !handler->getDone())
-	while (gotMore)
-	  gotMore = parser->parseNext(token);
-*/
-
     try 
 	{
-        parser->parse(xmlFile);
+        m_pParser->parse(xmlFile);
     }
 	catch (const OutOfMemoryException&) 
 	{
@@ -101,30 +89,11 @@ bool XercesCXMLParser::Parse()
         return false;
     }
 
-	m_pDoc = parser->getDocument();
-	m_pDocument = parser->getDocument();
-
-	Build();
+	m_pDocument = m_pParser->getDocument();
 
 	// for the debugging purpose
-//	PrintFile();
+	//PrintFile();
 
-/*
-	int errorCount = 0;
-	errorCount = parser->getErrorCount();
-
-	if (errorCount == 0)
-	{
-        XERCES_STD_QUALIFIER cout << "\nFinished parsing the memory buffer containing the following "
-			<< XERCES_STD_QUALIFIER endl;
-	}
-*/
-
-    delete parser;
-    delete errHandler;
-
-	
-	XMLPlatformUtils::Terminate();
 	return true;
 }
 
@@ -133,10 +102,12 @@ string XercesCXMLParser::GetParentNodeID (DOMNode *node)
 {
 	char *name;
 	DOMNode *parent;
-	bool bSuccess = false;
 
 	parent = node->getParentNode();
 
+	if (!parent)	// Error check (parent == NULL)
+		return "NONE";
+	
 	if (parent->hasAttributes())
 	{
         // get all the attributes of the node
@@ -145,30 +116,25 @@ string XercesCXMLParser::GetParentNodeID (DOMNode *node)
         for(int i=0;i<nSize;++i) 
 		{
             DOMAttr *pAttributeNode = (DOMAttr*) pAttributes->item(i);
-            // get attribute name
             name = XMLString::transcode(pAttributeNode->getName());
             
 			if (strcmp(name, "ID") == 0)
 			{
 				XMLString::release(&name);  
-				// get attribute type
 				name = XMLString::transcode(pAttributeNode->getValue());
-				bSuccess = true;
-				break;
+				return name;
 			}
 			//XMLString::release(&name);
 
         }
 	}
 
-	if (bSuccess)
-		return name;
-	else
-		return "NONE";
+	return "NONE";
 }
 
 
-int XercesCXMLParser::ProcessParsed(DOMNode *node, bool bPrint)
+// Transform parsed node data into DBEntry format
+int XercesCXMLParser::ProcessParsed(DOMNode *node, bool bPrint, vector<DBEntry> &a_vNodes)
 {
     DOMNode *child;
 	EATTRTYPE eAttrType;
@@ -261,35 +227,25 @@ int XercesCXMLParser::ProcessParsed(DOMNode *node, bool bPrint)
                 }
 
 				dbEntry->PrintNode();
+				a_vNodes.push_back (*dbEntry);
             }
 			++count;
 		}
 
         for (child = node->getFirstChild(); child != 0; child=child->getNextSibling())
-            count += ProcessParsed(child, bPrint);
+            count += ProcessParsed(child, bPrint, a_vNodes);
     }
     return count;
 }
 
 
-void XercesCXMLParser::Build()
+void XercesCXMLParser::Build(vector<DBEntry> &a_vNodes)
 {
     unsigned int elementCount = 0;
     if (m_pDocument) 
 	{
-        elementCount = ProcessParsed((DOMNode*)m_pDocument->getDocumentElement(), true);
-        // test getElementsByTagName and getLength
-/*
-		XMLCh xa[] = {chAsterisk, chNull};
-        if (elementCount != m_pDocument->getElementsByTagName(xa)->getLength()) 
-		{
-            XERCES_STD_QUALIFIER cout << "\nErrors occurred, element count is wrong\n" << XERCES_STD_QUALIFIER endl;
-        }
-*/
+        elementCount = ProcessParsed((DOMNode*)m_pDocument->getDocumentElement(), true, a_vNodes);
 	}
-
-
-
 }
 
 void XercesCXMLParser::PrintFile()
@@ -321,7 +277,7 @@ void XercesCXMLParser::PrintFile()
 	if ( pSerializer->canSetFeature(XMLUni::fgDOMWRTBOM, false) )
 	pSerializer->setFeature(XMLUni::fgDOMWRTBOM, false);
 
-	pSerializer->writeNode(pTarget, *m_pDoc);
+	pSerializer->writeNode(pTarget, *m_pDocument);
 }
 
 /*
@@ -363,3 +319,15 @@ void XercesCXMLParser::PrintFile()
 		cout << endl;
 	}
 */	
+
+
+/*
+	int errorCount = 0;
+	errorCount = m_pParser->getErrorCount();
+
+	if (errorCount == 0)
+	{
+        XERCES_STD_QUALIFIER cout << "\nFinished parsing the memory buffer containing the following "
+			<< XERCES_STD_QUALIFIER endl;
+	}
+*/

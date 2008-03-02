@@ -1,5 +1,8 @@
 #pragma once
 #include "xmlparser.h"
+#include "DBEntry.h"
+
+#include <vector>
 
 #include <xercesc/parsers/XercesDOMParser.hpp>
 #include <xercesc/dom/DOM.hpp>
@@ -32,13 +35,17 @@ public:
 	bool OpenFile(string a_szFilename);
 	bool Parse();
 	void PrintFile();
+	void Build(vector<DBEntry> &a_vNodes);
 
 private:
-	void Build();
-	int ProcessParsed(DOMNode *node, bool bPrint);
+	int ProcessParsed(DOMNode *node, bool bPrint, vector<DBEntry> &a_vNodes);
 	string GetParentNodeID(DOMNode *node);
 
 	string m_szFilename;
 	DOMNode *m_pDoc;
 	DOMDocument *m_pDocument;
+
+	XercesDOMParser* m_pParser;
+	ErrorHandler* m_pErrHandler;
+
 };
