@@ -101,6 +101,12 @@ bool XercesCXMLParser::Parse()
         return false;
     }
 
+
+	pDoc = parser->getDocument();
+
+	// for the debugging purpose
+	//Print();
+
 /*
 	int errorCount = 0;
 	errorCount = parser->getErrorCount();
@@ -119,40 +125,38 @@ bool XercesCXMLParser::Parse()
 	return true;
 }
 
-/*
+void XercesCXMLParser::Print()
+{
 
-static const char*  gXMLInMemBuf =
-"\
-<?xml version='1.0' encoding='\" MEMPARSE_ENCODING \"'?>\n\
-<!DOCTYPE company [\n\
-<!ELEMENT company     (product,category,developedAt)>\n\
-<!ELEMENT product     (#PCDATA)>\n\
-<!ELEMENT category    (#PCDATA)>\n\
-<!ATTLIST category idea CDATA #IMPLIED>\n\
-<!ELEMENT developedAt (#PCDATA)>\n\
-]>\n\n\
-<company>\n\
-    <product>XML4C</product>\n\
-    <category idea='great'>XML Parsing Tools</category>\n\
-    <developedAt>\n\
-      IBM Center for Java Technology, Silicon Valley, Cupertino, CA\n\
-    </developedAt>\n\
-</company>\
-";
+	DOMImplementation *pImplement = NULL;
+	// these two are needed to display DOM output.
+	DOMWriter *pSerializer = NULL;
+	XMLFormatTarget *pTarget = NULL;
 
-static const char*  gMemBufId = "prodInfo";
+	// get a serializer, an instance of DOMWriter (the "LS" stands for load-save).
+	// mcpanic 8301 XercesString -> XMLString
+//	pImplement = DOMImplementationRegistry::getDOMImplementation(XMLString("LS"));
+	pImplement = DOMImplementationRegistry::getDOMImplementation(XMLString::transcode("LS"));
+	pSerializer = ( (DOMImplementationLS*)pImplement )->createDOMWriter();
+	pTarget = new StdOutFormatTarget();
+	// set user specified end of line sequence and output encoding
+	// mcpanic 8301 XercesString -> XMLString
+	pSerializer->setNewLine( XMLString::transcode("\n") );
 
+	// set feature if the serializer supports the feature/mode
+	if ( pSerializer->canSetFeature(XMLUni::fgDOMWRTSplitCdataSections, false) )
+	pSerializer->setFeature(XMLUni::fgDOMWRTSplitCdataSections, false);
 
+	if ( pSerializer->canSetFeature(XMLUni::fgDOMWRTDiscardDefaultContent, false) )
+	pSerializer->setFeature(XMLUni::fgDOMWRTDiscardDefaultContent, false);
 
+	// turn off serializer "pretty print" option
+	if ( pSerializer->canSetFeature(XMLUni::fgDOMWRTFormatPrettyPrint, false) )
+	pSerializer->setFeature(XMLUni::fgDOMWRTFormatPrettyPrint, false);
 
-    MemBufInputSource* memBufIS = new MemBufInputSource
-    (
-        (const XMLByte*)gXMLInMemBuf
-        , strlen(gXMLInMemBuf)
-        , gMemBufId
-        , false
-    );
+	if ( pSerializer->canSetFeature(XMLUni::fgDOMWRTBOM, false) )
+	pSerializer->setFeature(XMLUni::fgDOMWRTBOM, false);
 
+	pSerializer->writeNode(pTarget, *pDoc);
 
-
-*/
+}

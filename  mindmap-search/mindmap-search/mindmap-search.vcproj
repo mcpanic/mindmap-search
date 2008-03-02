@@ -40,7 +40,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="&quot;E:\Documents and Settings\My Documents\Visual Studio 2005\Projects\xerces-c_2_8_0-x86-windows-vc_8_0\include&quot;"
+				AdditionalIncludeDirectories="&quot;E:\Documents and Settings\My Documents\Visual Studio 2005\Projects\xerces-c-src_2_8_0\src&quot;"
 				PreprocessorDefinitions="WIN32;_DEBUG;_CONSOLE"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -61,9 +61,9 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="xerces-c_2.lib"
+				AdditionalDependencies="xerces-c_2D.lib"
 				LinkIncremental="2"
-				AdditionalLibraryDirectories="&quot;E:\Documents and Settings\My Documents\Visual Studio 2005\Projects\xerces-c_2_8_0-x86-windows-vc_8_0\lib&quot;"
+				AdditionalLibraryDirectories=""
 				GenerateDebugInformation="true"
 				SubSystem="1"
 				TargetMachine="1"
