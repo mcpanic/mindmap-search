@@ -1,0 +1,8 @@
+<?xml version="1.0" ?>
+<!ELEMENT figures (PCDATA) >
+<!ATTLIST figures type (sales | inventory | labor) >
+<!ATTLIST figures value CDATA >
+<!ELEMENT department (figures*) >
+<!ATTLIST department name CDATA> 
+<!ELEMENT corporate (department*) >
+<!ATTLIST corporate name CDATA >
