@@ -11,11 +11,11 @@ DBEntry::~DBEntry(void)
 
 void DBEntry::PrintNode()
 {
-	cout << "nodeID			: " << nodeID << endl;
-	cout << "nodeName		: " << nodeName << endl;
+	cout << "nodeID		: " << nodeID << endl;
+	cout << "nodeName	: " << nodeName << endl;
 	cout << "timeCreated	: " << timeCreated << endl;
 	cout << "timeModified	: " << timeModified << endl;
-	cout << "nodeText		: " << nodeText << endl;
+	cout << "nodeText	: " << nodeText << endl;
 	cout << "parentNodeID	: " << parentNodeID << endl;
 }
 
@@ -93,3 +93,19 @@ string DBEntry::GetParentNodeID ()
 {
 	return parentNodeID;
 }
+
+vector<string> &DBEntry::GetNodeToken ()
+{
+	return nodeToken;
+}
+
+void DBEntry::PrintNodeToken()
+{
+	vector<string>::iterator itNodes;
+	for (itNodes = nodeToken.begin(); itNodes != nodeToken.end(); itNodes++)
+	{
+		cout << *itNodes << ", ";
+	}
+	cout << endl;
+}
+

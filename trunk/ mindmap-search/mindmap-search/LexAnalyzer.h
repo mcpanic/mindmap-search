@@ -3,5 +3,5 @@
 __interface ILexAnalyzer
 {
 	virtual void Release();
-	virtual void Analyze();
+	virtual void Analyze(class DBEntry &);
 };

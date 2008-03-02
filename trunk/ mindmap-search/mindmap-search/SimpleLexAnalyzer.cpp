@@ -1,5 +1,6 @@
 #include "StdAfx.h"
 #include "SimpleLexAnalyzer.h"
+#include "DBEntry.h"
 #include <iostream>
 
 SimpleLexAnalyzer::SimpleLexAnalyzer()
@@ -33,13 +34,13 @@ void SimpleLexAnalyzer::Tokenize(const string &str, vector<string>& tokens, cons
     }
 }
 
-void SimpleLexAnalyzer::Analyze()
+void SimpleLexAnalyzer::Analyze(DBEntry &a_dbEntry)
 {
-    vector<string> tokens;
+    //vector<string> vTokens;
 
-    string str("Split me up! Word1 Word2 Word3.");
+    string szNodeText = a_dbEntry.GetNodeText();
 
-    Tokenize(str, tokens);
+    Tokenize(szNodeText, a_dbEntry.GetNodeToken());
 
-    copy(tokens.begin(), tokens.end(), ostream_iterator<string>(cout, ", "));
+    // copy(a_dbEntry.GetNodeToken().begin(), a_dbEntry.GetNodeToken().end(), ostream_iterator<string>(cout, ", "));
 }
