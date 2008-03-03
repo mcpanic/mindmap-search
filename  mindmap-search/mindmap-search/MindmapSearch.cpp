@@ -104,7 +104,6 @@ int main (int argc, char* args[])
 	vector<DBEntry> vNodes;
 	pXMLParser->Build(vNodes);
 
-
 	//vector<DBEntry>::iterator itNodes;
 	//for (itNodes = vNodes.begin(); itNodes != vNodes.end(); itNodes++)
 	//	cout << (*itNodes).GetNodeText() << endl;

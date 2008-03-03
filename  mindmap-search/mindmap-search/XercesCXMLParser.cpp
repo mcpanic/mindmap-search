@@ -226,7 +226,9 @@ int XercesCXMLParser::ProcessParsed(DOMNode *node, bool bPrint, vector<DBEntry> 
                     }
                 }
 
-				dbEntry->PrintNode();
+				//dbEntry->PrintNode();
+
+				// Add the entry into the vector 
 				a_vNodes.push_back (*dbEntry);
             }
 			++count;
