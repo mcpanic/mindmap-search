@@ -55,11 +55,18 @@
   * 최근에 수정된 순서로 노드 정렬 (최근의 trend 파악 가능)
   * 생성된지 오래된 순서로 노드 정렬 (가장 역사깊은 생각 파악 가능)
 
-= 구현 환경 =
+== 구현 환경 ==
   * 개발환경: Visual Studio 2005 
   * 구현언어: C++ 
   * XML Parser: Xerces-C++ Version 2.8.0 ([http://www.apache.org/ Apache] 재단의 오픈소스인 [http://xerces.apache.org/ Xerces] 프로젝트의 서브셋)
   * DB: [http://www.sqlite.org/ SQLite Version 3] 
+
+== 습득한 지식 ==
+  * 추상 Interface 를 통한 확장성 있는 OOAD 노하우
+  * Extreme Programming 기법 (Iteration 기반)
+  * Mindmap 의 저장 구조
+  * XML parsing 기술
+  * SQLite C++ binding 활용 기술
 
 == 기타 ==
 [subsystem2_1 노트] 참고
