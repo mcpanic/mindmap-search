@@ -46,5 +46,20 @@
 	vector<string> nodeToken; // 형태소 분석 이후 쪼개진 텍스트
 }}}
 
+== DB를 통해 검색, 계산 가능한 유의미한 요소들 ==
+  * 특정 노드를 root로 하는 sub-tree (생각의 작은 단위별 분석)
+  * 자식 노드의 수 (연결성이 높다 - 허브역할을 하는 노드)
+  * 자식 노드의 리스트 (연관 키워드 검색에 사용가능)
+  * 노드 간 거리 (두 노드간의 관계 - 공통 parent 존재하는지/포함관계인지/얼마나 직접적인 관계가 있는지)
+  * 트리의 깊이 (?)
+  * 최근에 수정된 순서로 노드 정렬 (최근의 trend 파악 가능)
+  * 생성된지 오래된 순서로 노드 정렬 (가장 역사깊은 생각 파악 가능)
+
+= 구현 환경 =
+  * 개발환경: Visual Studio 2005 
+  * 구현언어: C++ 
+  * XML Parser: Xerces-C++ Version 2.8.0 ([http://www.apache.org/ Apache] 재단의 오픈소스인 [http://xerces.apache.org/ Xerces] 프로젝트의 서브셋)
+  * DB: [http://www.sqlite.org/ SQLite Version 3] 
+
 == 기타 ==
 [subsystem2_1 노트] 참고
