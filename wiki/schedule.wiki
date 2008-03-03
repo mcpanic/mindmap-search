@@ -33,7 +33,7 @@
   * [http://en.wikipedia.org/wiki/IBM_Rational_Unified_Process IBM RUP]
   * [http://en.wikipedia.org/wiki/Iterative_and_incremental_development Iterative and Incremental Development]
 
-  * 노트: 3주차의 후반부에는 계절학기 기말고사 및 세미나 평가회 층의 일정이 몰려있어 3~4일간 작업이 어려울 것 같습니다 (1/25일 종강)
+  * 노트: 3주차의 후반부에는 계절학기 기말고사 및 세미나 평가회 등의 일정이 몰려있어 3~4일간 작업이 어려울 것 같습니다 (1/25일 종강)
 
 
 = 행사, WoC 일정 =
