@@ -7,11 +7,11 @@ using namespace std;
 __interface IXMLParser
 {
 public:
-	virtual void Release();
+	virtual void Release() = 0;
 	
-	virtual bool OpenFile(string filename);
-	virtual bool Parse();
-	virtual void PrintFile();
-	virtual void Build(vector<class DBEntry> &a_vNodes);
+	virtual bool OpenFile(string filename) = 0;
+	virtual bool Parse() = 0;
+	virtual void PrintFile() = 0;
+	virtual void Build(vector<class DBEntry> &a_vNodes) = 0;
 
 };

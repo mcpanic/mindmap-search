@@ -2,6 +2,6 @@
 
 __interface IWeightAssigner
 {
-	virtual void Release();
-	virtual void Assign();
+	virtual void Release() = 0;
+	virtual void Assign() = 0;
 };

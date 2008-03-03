@@ -111,7 +111,7 @@ string XercesCXMLParser::GetParentNodeID (DOMNode *node)
 	if (parent->hasAttributes())
 	{
         // get all the attributes of the node
-        DOMNamedNodeMap *pAttributes = node->getAttributes();
+        DOMNamedNodeMap *pAttributes = parent->getAttributes();
         int nSize = pAttributes->getLength();
         for(int i=0;i<nSize;++i) 
 		{
