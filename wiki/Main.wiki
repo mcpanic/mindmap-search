@@ -3,23 +3,7 @@
 
 = Introduction =
   * 마인드맵에는 우리가 직관적으로 전개해 나가는 생각과 지식이 녹아들어 있다. 이러한 지식을 체계적으로 정리, 분류하고 검색 가능하게 하면 어떨까? 보다 효율적으로 지식을 저장하고 활용할 수 있지 않을까? 이 프로젝트는 이러한 발상에서 출발한다. 
- 
-== 마인드맵이란? == 
-  * [http://en.wikipedia.org/wiki/Mindmap 마인드맵]이란 중심의 키워드나 생각, 단어를 기준으로 단어, 업무, 생각을 덧붙여 나가면서 그린 다이어그램이다.
-  * 아이디어 수집, 정보요약, 생각정리, 문제해결 등에 적용될 수 있다.
-
-== 마인드맵 Guideline ==
-  * Buzan, T. (1991). The Mind Map Book. New York: Penguin. Chapter "Mind Mapping Guidelines" 에서 발췌
-  # Start in the center with an image of the topic, using at least 3 colors.
-  # Use images, symbols, codes, and dimensions throughout your Mind Map.
-  # Select key words and print using upper or lower case letters.
-  # Each word/image must be alone and sitting on its own line.
-  # The lines must be connected, starting from the central image. The central lines are thicker, organic and flowing, becoming thinner as they radiate out from the centre.
-  # Make the lines the same length as the word/image.
-  # Use colors – your own code – throughout the Mind Map.
-  # Develop your own personal style of Mind Mapping.
-  # Use emphasis and show associations in your Mind Map.
-  # Keep the Mind Map clear by using radial hierarchy, numerical order or outlines to embrace your branches
+  * [mindmap 마인드맵 개요]
 
 = System 구조 =
 마인드맵 기반의 지식DB 및 검색시스템은 크게 세 가지의 Sub-system으로 나눌 수 있다.
