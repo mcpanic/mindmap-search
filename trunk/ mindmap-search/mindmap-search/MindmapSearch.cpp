@@ -4,6 +4,8 @@
 #include "stdafx.h"
 #include "MindmapSearch.h"
 
+const char* g_szDBFilename = "mm.db";
+
 static IXMLParser *CreateXMLParser()
 {
 	return new XercesCXMLParser;
@@ -62,21 +64,23 @@ bool ProcessNodeText (vector<DBEntry> &a_vNodes)
 	return true;
 }
 
-void StoreInTextDB (vector<DBEntry> &a_vNodes)
+void StoreInDB (vector<DBEntry> &a_vNodes)
 {
 	IDBBuilder *dbBuilder = CreateDBBuilder();
+	dbBuilder->SetDBName(g_szDBFilename);
+	dbBuilder->OpenDB();
 
-	// 4. Add the entry to the DB
-	dbBuilder->ExecCommand();
-	
+	vector<DBEntry>::iterator itNodes;
+	for (itNodes = a_vNodes.begin(); itNodes != a_vNodes.end(); itNodes++)
+	{
+		dbBuilder->AddToNodeDB(g_szDBFilename, *itNodes);
+		dbBuilder->AddToTextDB(g_szDBFilename, *itNodes);
+	}
+
+	dbBuilder->CloseDB();
+
 	dbBuilder->Release();
 
-}
-
-void StoreInNodeDB (vector<DBEntry> &a_vNodes)
-{
-	IDBBuilder *dbBuilder = CreateDBBuilder();
-	dbBuilder->Release();
 }
 
 int main (int argc, char* args[]) 
@@ -105,12 +109,9 @@ int main (int argc, char* args[])
 	//for (itNodes = vNodes.begin(); itNodes != vNodes.end(); itNodes++)
 	//	cout << (*itNodes).GetNodeText() << endl;
 
-	// 1) For the node text, call ProcessNodeText -> StoreInTextDB
+	// For the node text, call ProcessNodeText 
 	ProcessNodeText (vNodes);
-	StoreInNodeDB (vNodes);
-
-	// 2) For the general node info, call StoreInNodeDB
-	StoreInTextDB (vNodes);
+	StoreInDB (vNodes);
 
 	// Delete module objects
 	pXMLParser->Release();
