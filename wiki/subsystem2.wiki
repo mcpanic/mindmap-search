@@ -31,7 +31,7 @@
   || NodeID (text) || TimeCre (text) || TimeMod (text) || ParentNodeID (text) ||
 
 
-  * 노드의 텍스트를 형태소 분석하여 인덱싱해 저장하는 Text DB
+  * 노드의 텍스트를 형태소 분석하여 인덱싱해 저장하는 Text DB (향후 검색엔진의 빠른 처리를 위해 Inverted Index 형태로 구성했다)
   || Token (text)|| NodeID (text) || Weight (integer) || Tag (text) || Position (integer) ||
 
 
@@ -63,10 +63,16 @@
 
 == 습득한 지식 ==
   * 추상 Interface 를 통한 확장성 있는 OOAD 노하우
+  * 검색엔진 DB 구성과 인덱싱 노하우
   * Extreme Programming 기법 (Iteration 기반)
   * Mindmap 의 저장 구조
   * XML parsing 기술
   * SQLite C++ binding 활용 기술
+
+== TODO ==
+  * Inverted Index 한 엔트리에 여러 개의 노드 연결시켜 엔트리 수 줄이기
+  * 가중치 부여 부분 구현
+  * 검색의 효율화를 위해 B-Tree 형태로 변환하기
 
 == 기타 ==
 [subsystem2_1 노트] 참고
