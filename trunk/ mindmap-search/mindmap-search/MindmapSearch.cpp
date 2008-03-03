@@ -67,7 +67,7 @@ void StoreInTextDB (vector<DBEntry> &a_vNodes)
 	IDBBuilder *dbBuilder = CreateDBBuilder();
 
 	// 4. Add the entry to the DB
-	dbBuilder->AddEntry();
+	dbBuilder->ExecCommand();
 	
 	dbBuilder->Release();
 
