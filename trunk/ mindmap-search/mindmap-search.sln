@@ -3,6 +3,8 @@ Microsoft Visual Studio Solution File, Format Version 9.00
 # Visual Studio 2005
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "mindmap-search", "mindmap-search\mindmap-search.vcproj", "{465DAB64-FD90-4B39-ABA0-BCF158BDFA24}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{08574937-55B8-4B4C-874D-194D84ADBDBB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
