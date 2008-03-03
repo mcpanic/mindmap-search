@@ -14,9 +14,9 @@
   * 4주(01/27~):  
   * 5주(02/03~): [Iteration1 1st iteration] 완료, 1st deliverable presented
   * 6주(02/10~): 
-  * 7주(02/17~): [Iteration2 2nd iteration] 완료, 2nd deliverable presented 
+  * 7주(02/17~):  
   * 8주(02/24~): 
-  * 9주(03/02) : [Iteration3 3rd iteration] 완료, 3rd deliverable presented
+  * 9주(03/02) : [Iteration2 2nd iteration] 완료, 2nd deliverable presented
 
 == I & I 관련 링크 ==
   * [http://alistair.cockburn.us/index.php/Incremental_versus_iterative_development Incremental versus Iterative development]
