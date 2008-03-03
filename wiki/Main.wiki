@@ -23,6 +23,8 @@
 
 = 프로젝트 일정 =
   * [schedule schedule] 페이지를 통해 프로젝트 일정관리를 한다.
+  * [Iteration1 첫번째 Iteration 요약]
+  * [Ineration2 두번째 Iteration 요약]
 
 = 관련 자료 = 
   * [Links Links] 페이지를 통해 관련 자료 및 링크를 축적한다.
