@@ -2,38 +2,10 @@
 #labels Phase-Implementation
 
 = 현재 상황 =
-  * 분석을 마치고 설계/구현을 동시에 진행 중
-  * XML Parser 적용 후 동작은 확인, DB 구축부분 진행 중
-  
-= 지식 DB 분석 =
-  * XML 포맷에 대한 이해
-  * 
+  * 완료
 
 = 지식 DB 설계 =
-== DB 구조 (노드 단위 저장) ==
-  * ID (int, primary key): 식별을 위한 고유 ID
-  * Time created (time): 생성시간, timestamp 사용고려
-  * Time last modified (time): 최종수정시간, timestamp 사용고려
-  * Text (char): 노드에 기록된 텍스트
-  * Parent node (int, default=NULL): root의 경우에는 NULL
-  * Note (char): 컬러, 이모티콘 등 
-
-== DB를 통해 검색, 계산 가능한 유의미한 요소들 ==
-  * 특정 노드를 root로 하는 sub-tree (생각의 작은 단위별 분석)
-  * 자식 노드의 수 (연결성이 높다 - 허브역할을 하는 노드)
-  * 자식 노드의 리스트 (연관 키워드 검색에 사용가능)
-  * 노드 간 거리 (두 노드간의 관계 - 공통 parent 존재하는지/포함관계인지/얼마나 직접적인 관계가 있는지)
-  * 트리의 깊이 (?)
-  * 최근에 수정된 순서로 노드 정렬 (최근의 trend 파악 가능)
-  * 생성된지 오래된 순서로 노드 정렬 (가장 역사깊은 생각 파악 가능)
-
-= 지식 DB 구현 =
-  * 개발환경: Visual Studio 2005 
-  * 구현언어: C++ 
-  * XML Parser: Xerces-C++ Version 2.8.0 ([http://www.apache.org/ Apache] 재단의 오픈소스인 [http://xerces.apache.org/ Xerces] 프로젝트의 서브셋)
-
-= 테스트 결과 =
-
+(이동)
 
 = 어려웠던 점 =
   * Extreme Programming 기법 적용하기 - 경험부족이 원인
@@ -43,4 +15,5 @@
   * 동기부여 부족 - 책임감 부족이 원인
 
 = 배운 점 =
-  * to be updated soon...
+  * XML Parsing 능력
+  
