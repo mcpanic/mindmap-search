@@ -40,7 +40,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="&quot;E:\Documents and Settings\My Documents\Visual Studio 2005\Projects\xerces-c-src_2_8_0\src&quot;;&quot;E:\Documents and Settings\My Documents\Visual Studio 2005\Projects\sqlite-amalgamation-3_5_6&quot;"
+				AdditionalIncludeDirectories="&quot;E:\Documents and Settings\My Documents\Visual Studio 2005\Projects\xerces-c-src_2_8_0\src&quot;;&quot;E:\Documents and Settings\My Documents\Visual Studio 2005\Projects\sqlite\sqlite-source&quot;"
 				PreprocessorDefinitions="WIN32;_DEBUG;_CONSOLE"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -61,7 +61,7 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="xerces-c_2D.lib"
+				AdditionalDependencies="xerces-c_2D.lib sqlite3.lib"
 				LinkIncremental="2"
 				AdditionalLibraryDirectories=""
 				GenerateDebugInformation="true"
@@ -178,6 +178,10 @@
 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
 			>
 			<File
+				RelativePath=".\CppSQLite3.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\DBEntry.cpp"
 				>
 			</File>
@@ -231,6 +235,10 @@
 			Filter="h;hpp;hxx;hm;inl;inc;xsd"
 			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
 			>
+			<File
+				RelativePath=".\CppSQLite3.h"
+				>
+			</File>
 			<File
 				RelativePath=".\DBBuilder.h"
 				>
