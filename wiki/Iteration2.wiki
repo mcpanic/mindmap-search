@@ -1,13 +1,17 @@
-#summary 2nd Iteration 기록
+#summary 2nd Iteration 정리
+#labels Phase-Implementation
 
-= Introduction =
+= 현재 상황 =
+  * 완료 (3/3)
 
-Add your content here.
+= 어려웠던 점 =
+  * 시간부족 - 막판에야 제대로 구현을 하게 되어 다소 급하게 마무리 함
+  * 설계의 어려움 - 멘토님의 도움이 있기 전까지 모듈 define 단계에서 어려움을 느낌
 
-
-= Details =
-
-Add your content here.  Format your content with:
-  * Text in *bold* or _italic_
-  * Headings, paragraphs, and lists
-  * Automatic links to other wiki pages
+= 배운 점 =
+  * 확장성 있는 설계를 위한 추상 Interface 사용 방법
+  * 외부 라이브러리 활용을 위한 중간 단계 인터페이스 설계 기법
+  * 검색 엔진의 효율적 구성 원리
+  * SQLite 라이브러리 적용 방법
+  * Subversion 을 통해 로컬과 Google Code 연동한 소스 관리
+  
