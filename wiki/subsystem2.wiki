@@ -20,6 +20,28 @@
   [XML파서모듈] - [형태소분석모듈] - [가중치산정모듈] - [색인저장모듈] - [물리적DB모듈]
   * 각 모듈들 사이는 인터페이스로 연결된다.
 
+== DB 설계 ==
+  * 두 가지의 DB 테이블이 존재한다.
+
+  * 일반적인 노드 정보를 담는 Node DB
+  || NnodeID (text) || TimeCre (text) || TimeMod (text) || ParentNodeID (text) ||
+
+
+  * 노드의 텍스트를 형태소 분석하여 인덱싱해 저장하는 Text DB
+  || Token (text)|| NodeID (text) || Weight (integer) || Tag (text) || Position (integer) ||
+
+
+== 마인드맵 노드 설계 ==
+{{{
+	string nodeID;            // 노드의 고유 ID
+	string nodeName;          // 노드의 이름 (XML 태그 이름)
+	string timeCreated;       // 생성시간
+	string timeModified;      // 최종수정시간
+	string nodeText;          // 노드 텍스트 (검색의 대상)
+	string parentNodeID;      // 부모노드의 고유  ID
+	vector<string> nodeToken; // 형태소 분석 이후 쪼개진 텍스트
+}}}
+
 == 생각해 볼 문제 == 
   * 이 subsystem은 backend에서만 동작하는 것인가? 다시 말하면, 사용자와 직접 인터페이스를 하는 경우가 있는가?
   * DB에 마인드맵을 추가하는 사용자 인터페이스가 존재해야 하지 않을까?
