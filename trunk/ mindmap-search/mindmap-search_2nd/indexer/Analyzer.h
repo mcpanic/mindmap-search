@@ -1,7 +1,6 @@
 #pragma once
 #include "AnalysisFile.h"
 #include "DBIndexEntity.h"
-//#include <sqlite3.h>
 #include "CppSQLite3.h"
 
 using namespace std;
